@@ -1,5 +1,5 @@
 package base;
-
+/*base package*/
 public class Complexe implements Comparable<Complexe> {
     private final double reel;
     private final double img;
