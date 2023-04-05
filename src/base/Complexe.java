@@ -1,5 +1,7 @@
 package base;
 
+import java.util.Objects;
+
 public class Complexe implements Comparable<Complexe> {
     private final double reel;
     private final double img;
@@ -26,14 +28,28 @@ public class Complexe implements Comparable<Complexe> {
 
     @Override
     public boolean equals(Object obj) {
-        Complexe c = new Complexe((Complexe)obj);
-        return (this.img == c.getImage()) && (this.reel == c.getReel());
+        if (obj == null)
+        {
+            return false;
+        }
+        else if (obj == this){
+            return true;
+        }
+        else {
+            Complexe autre = new Complexe((Complexe) obj);
+            if (autre.img==this.img && autre.reel == this.reel){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 
-    /*@Override
+    @Override
     public int hashCode() {
-        return hash(Complexe c);
-    }*/
+        return Objects.hash(this.reel,this.img);
+    }
     public double module(){
         return Math.sqrt((reel*reel) + (img*img));
     }
