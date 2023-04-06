@@ -32,6 +32,9 @@ public class Complexe implements Comparable<Complexe> {
         {
             return false;
         }
+        else if(!(obj instanceof Complexe)){
+            return false;
+        }
         else if (obj == this){
             return true;
         }
