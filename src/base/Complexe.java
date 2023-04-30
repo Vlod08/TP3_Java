@@ -1,5 +1,6 @@
 package base;
 
+import java.lang.Comparable;
 import java.util.Objects;
 
 public class Complexe implements Comparable<Complexe> {

@@ -3,14 +3,19 @@ package historique;
 import base.Complexe;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Objects;
+import java.lang.Comparable;
 
 
 
 public class ComplexeMemoire extends Complexe{
 
-    private Complexe c;
+
+
+    public ComplexeMemoire(ComplexeMemoire c) {
+        super((Complexe) c);
+        this.hist = c.getHistorique();
+    }
 
     public class Operation {
         String nom;
@@ -53,6 +58,9 @@ public class ComplexeMemoire extends Complexe{
     public Complexe multiplication(Complexe c) {
         Complexe res = super.multiplication(c);
         this.hist.add(new Operation("multiplication",c,res));
+        if(c instanceof ComplexeMemoire){
+            ((ComplexeMemoire) c).hist.add(new Operation("multiplication",this,res));
+        }
         return res;
     }
 
@@ -60,6 +68,9 @@ public class ComplexeMemoire extends Complexe{
     public Complexe addition(Complexe c){
         Complexe res = super.addition(c);
         this.hist.add(new Operation("addition",c,res));
+        if(c instanceof ComplexeMemoire){
+            ((ComplexeMemoire) c).hist.add(new Operation("multiplication",this,res));
+        }
         return res;
     }
 
@@ -83,6 +94,24 @@ public class ComplexeMemoire extends Complexe{
 
         }
         else{return false;}
+    }
+
+    @Override
+    public int compareTo(Complexe c) {
+        if(! (c instanceof ComplexeMemoire)){
+            super.compareTo(c);
+        }
+        else {
+            ComplexeMemoire cm = new ComplexeMemoire((ComplexeMemoire) c);
+            if(this.getHistorique().size()>cm.getHistorique().size()){
+                return -1;
+            }
+            else if(this.getHistorique().size()==this.getHistorique().size()){
+                return 0;
+            }
+
+        }
+        return 1;
     }
 }
 
