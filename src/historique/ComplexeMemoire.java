@@ -1,7 +1,7 @@
 package historique;
 
 import base.Complexe;
-
+import historique.Operation;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.lang.Comparable;
@@ -17,27 +17,6 @@ public class ComplexeMemoire extends Complexe{
         this.hist = c.getHistorique();
     }
 
-    public class Operation {
-        String nom;
-        Complexe operande;
-        Complexe res;
-
-        public Operation(String s, Complexe operande, Complexe res){
-            this.nom = s;
-            this.operande =operande;
-            this.res = res;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Operation operation = (Operation) o;
-            return Objects.equals(nom, operation.nom) && Objects.equals(operande, operation.operande) && Objects.equals(res, operation.res);
-        }
-
-
-    }
 
     ArrayList<Operation> hist;
     public ComplexeMemoire(double reel, double img) {
@@ -48,10 +27,6 @@ public class ComplexeMemoire extends Complexe{
     public ArrayList<Operation> getHistorique(){
         return (ArrayList<Operation>)this.hist.clone();
     }
-
-
-
-
 
 
     @Override
